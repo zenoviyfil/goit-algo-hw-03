@@ -6,14 +6,15 @@ def string_to_datetime(date_string):
     return datetime.strptime(date_string, "%Y-%m-%d")
 
 def get_days_from_today(date):
-    today = datetime.today()
-    delta = string_to_datetime(date) - today
-    return delta.days
+    try:
+        today = datetime.today().date()
+        target_date = string_to_datetime(date).date()
+        delta = (target_date - today).days
+        return delta
+    except ValueError as error:
+        return str(error)
 
-def get_numbers_ticket(min, max, quantity):
-    if quantity > (max - min + 1):
-        raise ValueError("Quantity cannot be greater than the range size")
-    
+def get_numbers_ticket(min, max, quantity): 
     if min < 1 or max > 1000 or quantity < min or quantity > max:
         return []
     
@@ -54,7 +55,7 @@ def get_upcoming_birthdays(users, days=7):
 
 
 
-print(get_days_from_today("2021-10-09"))
+print(get_days_from_today("2025-02-02"))
 
 lottery_numbers = get_numbers_ticket(1, 49, 6)
 print("Ваші лотерейні числа:", lottery_numbers)
