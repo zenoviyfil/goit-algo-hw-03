@@ -15,10 +15,10 @@ def get_days_from_today(date):
         return str(error)
 
 def get_numbers_ticket(min, max, quantity): 
-    if min < 1 or max > 1000 or quantity < min or quantity > max:
+    if min < 1 or max > 1000 or quantity > (max - min - 1):
         return []
     
-    ticket_numbers = random.sample(range(min, max + 1), quantity)
+    ticket_numbers = random.sample(range(min, max), quantity)
     
     return sorted(ticket_numbers)
 
